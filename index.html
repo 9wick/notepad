@@ -35,11 +35,23 @@
 </head>
 <body>
 <textarea id="memo" autofocus spellcheck="false"></textarea>
+<script src="storage.js"></script>
 <script>
-  const KEY = "memo";
+  cleanup();
+
+  const params = new URLSearchParams(location.search);
+  let id = params.get("id");
+  if (!id) {
+    // 素の URL を開くたびに新しいメモにするため、id 未指定時はここで発行する
+    id = crypto.randomUUID();
+    params.set("id", id);
+    history.replaceState(null, "", `${location.pathname}?${params.toString()}`);
+  }
+
   const el = document.getElementById("memo");
-  el.value = sessionStorage.getItem(KEY) ?? "";
-  el.addEventListener("input", () => sessionStorage.setItem(KEY, el.value));
+  const note = loadNote(id);
+  el.value = note ? note.text : "";
+  el.addEventListener("input", () => saveNote(id, el.value));
 </script>
 </body>
 </html>
