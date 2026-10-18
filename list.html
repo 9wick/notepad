@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<meta name="description" content="このブラウザに保存したメモを更新日時と本文プレビューで一覧できます。メモを選ぶと続きから編集できます。">
 <title>memo list</title>
 <link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml" sizes="any">
@@ -59,7 +60,9 @@
 </style>
 </head>
 <body>
+<main aria-label="メモ一覧">
 <ul id="list"></ul>
+</main>
 <script src="storage.js"></script>
 <script>
   cleanup();
